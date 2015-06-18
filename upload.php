@@ -1,7 +1,6 @@
 <?php
+	include('../config.php');
 	if(isset($_POST["submit"])) {
-		mysql_connect('localhost', 'root', 'root');
-		mysql_select_db('music');
 		$target_dir = "songs/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
