@@ -48,7 +48,7 @@
 	<body>
 	<div id = 'player' style = 'position : absolute; height : 100px; width : 100%; left : 0%; top : 0%; background : rgba(200,200,200, 0.5); display : none'>
 		<div style =' font-family : courier; font-size : 31px; font-weight : 800; text-align : center' id = 'play_data'>sonage name </div>
-		<video id = 'song' controls = "" style = 'position : absolute; height : 28px; width : 99%; padding : 10px;'>
+		<video loop id = 'song' controls = "" style = 'position : absolute; height : 28px; width : 99%; padding : 10px;'>
 			<source src = "" type = "audio/mp3" id = 'src'>
 		</video>
 	</div>
@@ -90,5 +90,6 @@
 
 		});
 	</script>
+	<script src = '../analytics.js'></script>
 	</body>
 </html>

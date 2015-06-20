@@ -34,7 +34,7 @@
     <input type='text' name = 'name' placeholder = 'Name of the song'/>
     <input type='text' name = 'movie' placeholder = 'movie'/>
     <input type='text' name = 'artist' placeholder = 'artist'/>
-    <input type="submit" value="Upload Image" name="submit">
+    <input type="submit" value="Upload Song" name="submit">
 </form>
 
 </body>
