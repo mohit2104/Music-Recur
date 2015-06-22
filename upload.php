@@ -1,5 +1,10 @@
 <?php
 	include('../config.php');
+	session_start();
+	if(!isset($_SESSION['log'])){
+		echo "<a href = 'session.php'>Admin verification</a>";
+		return;
+	}
 	if(isset($_POST["submit"])) {
 		$target_dir = "songs/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -29,7 +34,7 @@
 <body>
 
 <form action="" method="post" enctype="multipart/form-data">
-    Select image to upload:
+    Select Song to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type='text' name = 'name' placeholder = 'Name of the song'/>
     <input type='text' name = 'movie' placeholder = 'movie'/>
