@@ -141,7 +141,7 @@
 				document.getElementById('song').load();
 				document.getElementById('song').play();
 				$scope.audit($scope.names[$scope.current].oid);
-			//	$scope.names[$scope.current].count = parseInt($scope.names[$scope.current].count) + 1;
+				$scope.names[$scope.current].count = parseInt($scope.names[$scope.current].count) + 1;
                 }
 
             $scope.changeCurrent = function(a){
