@@ -60,6 +60,13 @@
 				background : rgba(50, 100, 200, 0.6);
 				color : white;
 			}
+			.count{
+				font-size : 11px;
+				padding : 3px;
+				background : black;
+				color : white;
+				border-radius : 20%;
+			}
 		</style>
 	</head>
 	<body>
@@ -85,9 +92,12 @@
 		   			<div class = 'describe'>
 		   				{{ (x.name | uppercase) + ' - ' + (x.movie | uppercase)  }} 
 		   			</div>
-		   			<button class = 'download' ng-click = "changeCurrent(x.id)">
+					<div class = 'download' >
+						<span class  = 'count'>{{   x.oid  }}</span>
+		   				<button  ng-click = "changeCurrent(x.id)">
 		   					Play
-		   			</button>
+		   				</button>
+					</div>
 		   			<br>
 		  		</div>
 			</div>
@@ -112,7 +122,7 @@
     			<?php 
     				$id = 0;
 	    			while ( $row = mysql_fetch_assoc($result) ){
-	    				echo "{ id : '".$id."', name : '".$row['name']."', movie : '".$row['movie']."', artist : '".$row['artist']."', link : '".$row['link']."', count : '".$row['count']."'},";
+	    				echo "{ oid : '".$row['id']."', id : '".$id."', name : '".$row['name']."', movie : '".$row['movie']."', artist : '".$row['artist']."', link : '".$row['link']."', count : '".$row['count']."'},";
 	    				$id = $id + 1;
 	    			}
 	    		?>
@@ -121,7 +131,7 @@
     		$scope.current = 0;
     		$scope.flag = 1;
 
-		 	$scope.play_song = function(a, b){
+		 	$scope.play_song = function(){
 		 		console.log($scope.current);
 		 		var b = ($scope.names[$scope.current].name )  + ' - ' + ($scope.names[$scope.current].movie );
 				var a = $scope.names[$scope.current].link;
@@ -130,6 +140,8 @@
 				document.getElementById('src').src = a;
 				document.getElementById('song').load();
 				document.getElementById('song').play();
+				$scope.audit($scope.names[$scope.current].oid);
+			//	$scope.names[$scope.current].count = parseInt($scope.names[$scope.current].count) + 1;
                 }
 
             $scope.changeCurrent = function(a){
@@ -171,6 +183,13 @@
 					return true;
 				else
 					return false;
+			}
+			$scope.audit = function(a){
+				$.ajax({
+					url : "audit.php",
+					method : "GET",
+					data : { id : a }
+				});
 			}
 		});
 	</script>
