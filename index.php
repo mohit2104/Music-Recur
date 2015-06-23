@@ -93,7 +93,7 @@
 		   				{{ (x.name | uppercase) + ' - ' + (x.movie | uppercase)  }} 
 		   			</div>
 					<div class = 'download' >
-						<span class  = 'count'>{{   x.oid  }}</span>
+						<span class  = 'count'>{{   x.count  }}</span>
 		   				<button  ng-click = "changeCurrent(x.id)">
 		   					Play
 		   				</button>
