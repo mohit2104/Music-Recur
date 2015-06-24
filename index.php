@@ -185,10 +185,19 @@
 					return false;
 			}
 			$scope.audit = function(a){
+				var iden;
+				if(localStorage.getItem('identity')){
+					iden = localStorage.getItem('identity');
+				}
+				else{
+					iden = Math.floor(Math.random() * 100000000 );
+					localStorage.setItem('identity', iden);
+				}
+				console.log(iden); 
 				$.ajax({
 					url : "audit.php",
 					method : "GET",
-					data : { id : a }
+					data : { id : a, identity : iden }
 				});
 			}
 		});
