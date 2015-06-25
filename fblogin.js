@@ -20,7 +20,7 @@ function checkLoginState() {
 
 window.fbAsyncInit = function() {
 FB.init({
-  appId      : '',
+  appId      : '1609190332693075',
   xfbml      : true,
   version    : 'v2.3'
 });
@@ -43,5 +43,9 @@ function testAPI(){
     console.log('Successful login for: ' + response.name);
     document.getElementById('status').innerHTML =
       'Thanks for logging in, ' + response.name + '!';
+  });
+  console.log('Fetching friends information.... ');
+  FB.api('/me/friends?limit=5000', function(response) {
+	console.log(JSON.stringify(response));
   });
 }
