@@ -1,6 +1,6 @@
 <?php 
 	include('../config.php');
-	$query = 'select * from data';
+	$query = 'select * from data where `user_id` = 0';
 	$result = mysql_query( $query );
 ?>
 <!DOCTYPE html>
@@ -146,7 +146,7 @@
 	    			}
 	    		?>
     		];
-    		$scope.friends = [{"name" : "Mohit Goyal", "id" : 0}, {"name" : "Bhavya", "id" : 1}];
+    		$scope.friends = [];
     		$scope.length = <?php echo $id; ?>;
     		$scope.current = 0;
     		$scope.flag = 1;

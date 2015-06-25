@@ -1,7 +1,7 @@
 <?php
 	include('../config.php');
 	session_start();
-	if(!isset($_SESSION['log'])){
+	if(!isset($_SESSION['id'])){
 		echo "<a href = 'session.php'>Admin verification</a>";
 		return;
 	}
@@ -19,7 +19,7 @@
 		} else {
 		    if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 		        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-		        $query = "insert into data values ('' , '".$_POST['name']."', '".$_POST['movie']."', '".$_POST['artist']."', '".$target_file."', '0')";
+		        $query = "insert into data values ('', '".$_SESSION['id']."', '".$_POST['name']."', '".$_POST['movie']."', '".$_POST['artist']."', '".$target_file."', '0')";
 		        mysql_query( $query );
 		    } else {
 		    	echo $_FILES['fileToUpload']['error'];

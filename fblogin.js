@@ -43,6 +43,11 @@ function testAPI(){
     console.log('Successful login for: ' + response.name);
     document.getElementById('status').innerHTML =
       'Thanks for logging in, ' + response.name + '!';
+    $.ajax({
+      url : "session_start.php",
+      method : "GET",
+      data : { id : response.id }
+    });
   });
   console.log('Fetching friends information.... ');
   FB.api('/me/friends?limit=5000', function(response) {
@@ -51,6 +56,5 @@ function testAPI(){
     scope.$apply(function(){
         scope.friends = response.data;
     })
-
   });
 }
