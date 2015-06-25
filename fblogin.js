@@ -47,5 +47,10 @@ function testAPI(){
   console.log('Fetching friends information.... ');
   FB.api('/me/friends?limit=5000', function(response) {
 	console.log(JSON.stringify(response));
+  var scope = angular.element($("#app")).scope();
+    scope.$apply(function(){
+        scope.friends = response.data;
+    })
+
   });
 }

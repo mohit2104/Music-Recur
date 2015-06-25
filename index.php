@@ -67,15 +67,34 @@
 				color : white;
 				border-radius : 20%;
 			}
+			#friendList{
+				position: absolute;
+				left : 5px;
+				top : 10%;
+				background : rgba(230, 230, 230, 0.4);
+				width : 20%;
+				z-index: 10;
+			}
+			.friend{
+				position : relative;
+				font-size : 20px;
+				border-bottom : 1px solid rgba(0,0,0,0.1);
+				padding : 10px;
+			}
 		</style>
 	</head>
 	<body>
-	<div ng-app = 'myApp' ng-controller = 'namesCtrl'>
+	<div ng-app = 'myApp' ng-controller = 'namesCtrl' id = 'app'>
 		<div id = 'player' style = 'position : absolute; height : 100px; width : 100%; left : 0%; top : 0%; background : rgba(200,200,200, 0.5); display : none'>
 			<div style =' font-family : courier; font-size : 31px; font-weight : 800; text-align : center' id = 'play_data'>sonage name </div>
 			<video id = 'song' song controls = ""  style = 'position : absolute; height : 28px; width : 99%; padding : 10px;'>
 				<source src = "" type = "audio/mp3" id = 'src'>
 			</video>
+		</div>
+		<div id = 'friendList'>
+			<div class = 'friend' ng-repeat = 'friend in friends' ng-click = 'getNewList(friend.id)'>
+			{{ friend.name }}
+			</div>
 		</div>
 		<div id = 'app'>
 			<h1 style >
@@ -127,6 +146,7 @@
 	    			}
 	    		?>
     		];
+    		$scope.friends = [{"name" : "Mohit Goyal", "id" : 0}, {"name" : "Bhavya", "id" : 1}];
     		$scope.length = <?php echo $id; ?>;
     		$scope.current = 0;
     		$scope.flag = 1;
@@ -199,6 +219,18 @@
 					method : "GET",
 					data : { id : a, identity : iden }
 				});
+			}
+			$scope.getNewList = function(id){
+				console.log("fetching new list");
+				$.ajax({
+					url : "fsl.php",
+					method : "GET",
+					data : { userId : id }
+				}).done(function(response){
+					console.log(response);
+					$scope.names = JSON.parse(response);
+					$scope.$apply();
+				});				
 			}
 		});
 	</script>
