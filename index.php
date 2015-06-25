@@ -203,5 +203,10 @@
 		});
 	</script>
 	<script src = '../analytics.js'></script>
+	<script src = 'fblogin.js'></script>
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+	</fb:login-button>
+	<div id="status">
+	</div>
 	</body>
 </html>
