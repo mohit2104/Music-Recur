@@ -3,7 +3,7 @@
 	global $key;
 	session_start();
 	if(isset($_POST['submit']) && isset($_POST['key']) && $_POST['key'] == $key){
-	$_SESSION['log'] = "t";
+	$_SESSION['id'] = "t";
 	echo "<a href = 'upload.php'>Upload</a>";
 	return;
 }
