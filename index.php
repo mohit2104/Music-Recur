@@ -1,6 +1,6 @@
 <?php 
 	include('../config.php');
-	$query = 'select * from data where `user_id` = 0';
+	$query = 'select * from data';
 	$result = mysql_query( $query );
 ?>
 <!DOCTYPE html>
@@ -67,131 +67,15 @@
 				color : white;
 				border-radius : 20%;
 			}
-			#friendList{
-				position: absolute;
-				left : 5px;
-				top : 10%;
-				background : rgba(230, 230, 230, 0.4);
-				width : 20%;
-				z-index: 10;
-				min-height: 90%;
-			}
-			.friend{
-				position : relative;
-				font-size : 24px;
-				margin : 10px;
-				padding : 10px;
-				background : rgba(0, 0, 0, 0.1);
-				font-family: cursive;
-				font-weight: 400;
-				color : rgba(50, 100, 200, 0.7);
-				text-align: center
-			}
-			#nav{
-				position : absolute; 
-				left : 0%;
-				top : 0%;
-				width : 100%;
-				height: 50px;
-				background : black;
-				border-radius: 0px;
-				margin : 0px;
-			}
-			#friend_search{
-				position : relative;
-				left : 0%;
-				width : 90%;
-				font-size: 20px;
-				margin : 10px;
-			}
-			.fhead{
-				background : black;
-				color : rgba(200, 150, 50, 1);
-				font-size : 25px;
-				padding : 5px;
-				font-family : arial;
-				font-weight : 400;
-				text-align: center;
-				margin-bottom : 10px;
-			}
-			.alert{
-				text-align: center;
-				font-size : 22px;
-				color : rgba(255, 0, 0, 0.5);
-			}
-			.upload{
-				margin : 15px;
-				color : white;
-				font-size : 20px;
-				cursor : pointer;
-				text-decoration: none;
-			}
-			#load{
-				position : absolute;
-				width : 100%;
-				height : 100%;
-				left : 0%;
-				top : 0%;
-				background : rgba(0, 0, 0, 0.7);
-				z-index : 10;
-			}
-			.loadi{
-				position : absolute;
-				left : 45%;
-				top : 45%;
-				font-size : 100px;
-				color : white;
-			}
-			.upload:hover{
-				color : lightblue;
-			}
 		</style>
 	</head>
-	<body style = 'overflow-x : hidden'>
+	<body>
 	<div ng-app = 'myApp' ng-controller = 'namesCtrl'>
-		<div id = 'nav'>
-			<fb:login-button ng-show = '!logged' scope="email, user_friends" onlogin="checkLoginState();" style = 'float : right; margin : 15px'>				
-			</fb:login-button>
-			<div class = 'upload' style = 'float : right;'>
-				{{ lname }} <i class = 'fa fa-user'></i>
-			</div>
-			<div style = 'float : left'>
-				<a href = 'upload.php' class = 'upload' style = 'float : left' ng-show = 'logged'>
-					Upload <i class  ='fa fa-upload'></i>
-				</a>
-				<div class = 'upload link' style = 'float : left' ng-click = "getNewList('0', 'Default')">
-					Home <i class  ='fa fa-home'></i>
-				</div>
-				<div class = 'upload' style = 'float : left' ng-show = 'logged'>
-					Edit <i class  ='fa fa-edit'></i>
-				</div>
-				<div class = 'upload' style = 'float : left'>
-					<div style = 'background : white'><input type = 'text' style = 'border : 0px; font-size : 20px; width : 600px; padding : 1px' placeholder = 'Search By Song Name'/><i class  ='fa fa-search' style = 'color : black'></i></div>
-				</div>
-			
-			</div>
-		</div>
 		<div id = 'player' style = 'position : absolute; height : 100px; width : 100%; left : 0%; top : 0%; background : rgba(200,200,200, 0.5); display : none'>
 			<div style =' font-family : courier; font-size : 31px; font-weight : 800; text-align : center' id = 'play_data'>sonage name </div>
 			<video id = 'song' song controls = ""  style = 'position : absolute; height : 28px; width : 99%; padding : 10px;'>
 				<source src = "" type = "audio/mp3" id = 'src'>
 			</video>
-		</div>
-		<div id = 'friendList' ng-show = 'logged'>
-			<div class = 'fhead'>Friends</div>
-			<div class = 'friend' ng-click = "getNewList(myid, myname)" ng-show = "logged">
-				Me
-			</div> 
-			<div ng-show = '!friends.length' class  = 'alert'>
-				Sorry, No friends Found :(
-				<div class = 'friend' style = 'text-align : center'>Invite</div>
-			</div>
-			<div ng-show = 'friends.length'>
-				<input type = 'text' id = 'friend_search' placeholder = "Search A Friend"/ ng-model = 'fsearch'>
-				<div class = 'friend' ng-repeat = 'friend in friends | filter : fsearch' ng-click = 'getNewList(friend.id, friend.name)'>
-				{{ friend.name }}
-				</div>
-			</div>
 		</div>
 		<div id = 'app'>
 			<h1 style >
@@ -203,8 +87,7 @@
 			<p>
 				<input id = 'input' type = 'text' ng-model = 'test' placeholder = 'Enter Song Name' />
 			</p>
-			<h3 ng-show = '!names.length' class = 'alert'>Playlist Is Empty</h3>
-		  	<div ng-repeat = " x in names | filter : test " ng-show = 'names.length'>
+		  	<div ng-repeat = " x in names | filter : test  ">
 		   		<div class = 'each'>
 		   			<div class = 'describe'>
 		   				{{ (x.name | uppercase) + ' - ' + (x.movie | uppercase)  }} 
@@ -218,11 +101,6 @@
 		   			<br>
 		  		</div>
 			</div>
-		</div>
-		<div id = 'load' ng-show = 'load'>
-		<div class = 'loadi'>
-			<i class ='fa fa-refresh fa-spin'></i>
-		</div>
 		</div>
 	</div>
 	<script>
@@ -249,16 +127,10 @@
 	    			}
 	    		?>
     		];
-    	//	$scope.friends = [];
-    		$scope.myid = 0;
-    		$scope.myname = 0;
-    		$scope.load = false;
-    		$scope.friends = [{"name" : "mohit", "id" : 0}, {"name" : "goyal", "id" : 1}];
     		$scope.length = <?php echo $id; ?>;
     		$scope.current = 0;
     		$scope.flag = 1;
-    		$scope.logged = false;
-    		$scope.lname = "Mohit Goyal";
+
 		 	$scope.play_song = function(){
 		 		console.log($scope.current);
 		 		var b = ($scope.names[$scope.current].name )  + ' - ' + ($scope.names[$scope.current].movie );
@@ -328,27 +200,8 @@
 					data : { id : a, identity : iden }
 				});
 			}
-			$scope.getNewList = function(id, name){
-				$scope.load = true;
-				console.log("fetching new list");
-				$.ajax({
-					url : "fsl.php",
-					method : "GET",
-					data : { userId : id }
-				}).done(function(response){
-					console.log(response);
-					$scope.names = JSON.parse(response);
-					$scope.lname = name;
-					$scope.load = false;
-					$scope.$apply();
-				});				
-			}
 		});
 	</script>
 	<script src = '../analytics.js'></script>
-	<script src = 'fblogin.js'></script>
-	<div id="status">
-	</div>
 	</body>
 </html>
-	
