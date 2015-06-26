@@ -146,6 +146,7 @@
 				color : lightblue;
 			}
 			#player{
+				z-index : 9;
 				position : fixed; 
 				width : 100%; 
 				left : 0%; 
@@ -190,12 +191,6 @@
 			
 			</div>
 		</div>
-		<div id = 'player'>
-			<div id = 'play_data'>{{ song_name | uppercase }}</div>
-			<audio id = 'song' song controls = "">
-				<source src = "" type = "audio/mp3" id = 'src'>
-			</audio>
-		</div>
 		<div id = 'friendList' ng-show = 'logged'>
 			<div class = 'fhead'>Friends</div>
 			<div class = 'friend' ng-click = "getNewList(myid, myname)" ng-show = "logged">
@@ -211,6 +206,12 @@
 				{{ friend.name }}
 				</div>
 			</div>
+		</div>
+		<div id = 'player'>
+			<div id = 'play_data'>{{ song_name | uppercase }}</div>
+			<audio id = 'song' song controls = "">
+				<source src = "" type = "audio/mp3" id = 'src'>
+			</audio>
 		</div>
 		<div id = 'app'>
 			<h1 style >
