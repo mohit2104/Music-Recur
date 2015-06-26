@@ -73,7 +73,7 @@
 				top : 10%;
 				background : rgba(230, 230, 230, 0.4);
 				width : 20%;
-				z-index: 10;
+				z-index: 8;
 				min-height: 90%;
 			}
 			.friend{
@@ -201,7 +201,7 @@
 				<div class = 'friend' style = 'text-align : center'>Invite</div>
 			</div>
 			<div ng-show = 'friends.length'>
-				<input type = 'text' id = 'friend_search' placeholder = "Search A Friend"/ ng-model = 'fsearch'>
+				<input type = 'text' id = 'friend_search' placeholder = "Search A Friend" ng-model = 'fsearch'>
 				<div class = 'friend' ng-repeat = 'friend in friends | filter : fsearch' ng-click = 'getNewList(friend.id, friend.name)'>
 				{{ friend.name }}
 				</div>
