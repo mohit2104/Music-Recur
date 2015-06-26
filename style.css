@@ -1,0 +1,165 @@
+button{
+	background : rgba( 0, 0, 0, 0.8);
+	color : white;
+	padding : 5px;
+	border-radius : 20%;
+}
+
+a{
+	color : white;
+}
+
+#app{
+	position : absolute;
+	top : 10%;
+	width : 100%;
+	text-align : center;
+	font-family: courier;
+}
+#input{
+	font-size : 25px;
+	padding : 4px;
+	width : 40%;
+}
+.each{
+	position : relative;
+	left : 30%;
+	width : 40%;
+	font-size : 20px;
+	border-bottom : 1px solid rgba(0,0,0,0.1);
+	padding : 10px;
+}
+.describe{
+	position : relative;
+	width : 70%;
+	padding : 0px;
+	text-align: left;
+	margin-bottom : -25px;
+}
+.download{
+	position : absolute;
+	right : 4px;
+	top : 3px;
+	text-align: right;
+	margin : 0px;
+}
+.control{
+	padding : 5px;
+	font-size : 20px;
+	cursor : pointer;
+	border-radius : 50%;
+}
+.control:hover{
+	background : black;
+	color : white;
+}
+.active{
+	background : rgba(50, 100, 200, 0.6);
+	color : white;
+}
+.count{
+	font-size : 11px;
+	padding : 3px;
+	background : black;
+	color : white;
+	border-radius : 20%;
+}
+#friendList{
+	position: absolute;
+	left : 5px;
+	top : 10%;
+	background : rgba(230, 230, 230, 0.4);
+	width : 20%;
+	z-index: 8;
+	min-height: 90%;
+}
+.friend{
+	position : relative;
+	font-size : 24px;
+	margin : 10px;
+	padding : 10px;
+	background : rgba(0, 0, 0, 0.1);
+	font-family: cursive;
+	font-weight: 400;
+	color : rgba(50, 100, 200, 0.7);
+	text-align: center
+}
+#nav{
+	position : absolute; 
+	left : 0%;
+	top : 0%;
+	width : 100%;
+	height: 50px;
+	background : black;
+	border-radius: 0px;
+	margin : 0px;
+}
+#friend_search{
+	position : relative;
+	left : 0%;
+	width : 90%;
+	font-size: 20px;
+	margin : 10px;
+}
+.fhead{
+	background : black;
+	color : rgba(200, 150, 50, 1);
+	font-size : 25px;
+	padding : 5px;
+	font-family : arial;
+	font-weight : 400;
+	text-align: center;
+	margin-bottom : 10px;
+}
+.alert{
+	text-align: center;
+	font-size : 22px;
+	color : rgba(255, 0, 0, 0.5);
+}
+.upload{
+	margin : 15px;
+	color : white;
+	font-size : 20px;
+	cursor : pointer;
+	text-decoration: none;
+}
+#load{
+	position : absolute;
+	width : 100%;
+	height : 100%;
+	left : 0%;
+	top : 0%;
+	background : rgba(0, 0, 0, 0.7);
+	z-index : 10;
+}
+.loadi{
+	position : absolute;
+	left : 45%;
+	top : 45%;
+	font-size : 100px;
+	color : white;
+}
+.upload:hover{
+	color : lightblue;
+}
+#player{
+	z-index : 9;
+	position : fixed; 
+	width : 100%; 
+	left : 0%; 
+	bottom : 0%; 
+	background : black;
+	display : none;
+}
+#play_data{
+	color : white;
+	font-family : courier; 
+	font-size : 25px; 
+	font-weight : 800; 
+	text-align : center;
+	margin : 4px;
+}
+#song{
+	height : 28px;
+	width : 100%;
+}

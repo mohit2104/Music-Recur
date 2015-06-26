@@ -31,15 +31,68 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<style>
+		#nav{
+			position : absolute; 
+			left : 0%;
+			top : 0%;
+			width : 100%;
+			height: 50px;
+			background : black;
+		}
+		#upf{
+			position: absolute;
+			top : 120px;
+			width : 100%;
+		}
+		.inp{
+			padding : 10px;
+		}
+		input{
+			font-size: 25px;
+			padding : 10px;
+			margin : 0px;
+		}
+		.upload{
+			margin : 15px;
+			color : white;
+			font-size : 20px;
+			cursor : pointer;
+			text-decoration: none;
+		}
+	</style>
+</head>	
 <body>
-
-<form action="" method="post" enctype="multipart/form-data">
-    Select Song to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type='text' name = 'name' placeholder = 'Name of the song'/>
-    <input type='text' name = 'movie' placeholder = 'movie'/>
-    <input type='text' name = 'artist' placeholder = 'artist'/>
-    <input type="submit" value="Upload Song" name="submit">
+<div id ='nav'>
+	<div class = 'upload link' style = 'float : left' ng-click = "getNewList('0', 'Default')">
+		Home <i class  ='fa fa-home'></i>
+	</div>
+	<div class = 'upload' style = 'float : left'>
+		Edit <i class  ='fa fa-edit'></i>
+	</div>
+</div>
+</div>
+<form id = 'upf' action="" method="post" enctype="multipart/form-data">
+	<div class = 'inp'>
+		<span style = 'font-size : 25px; font-family : courier; background : rgba(100, 100, 100, 0.3)'>
+			UPLOAD A NEW SONG
+		</span><br>
+    	<input type="file" name="fileToUpload" id="fileToUpload"  \>
+    </div>
+    <div class = 'inp'>
+    	<input type='text' name = 'name' placeholder = 'Song Name'/>
+    </div>
+    <div class = 'inp'>
+    	<input type='text' name = 'movie' placeholder = 'Movie Name'/>
+    </div>
+    <div class = 'inp'>
+    	<input type='text' name = 'artist' placeholder = 'Artists Name'/>
+    </div>
+    <div class  = 'inp'>
+    	<input type="submit" value="Upload Song" name="submit" />
+    </div>
 </form>
 
 </body>
