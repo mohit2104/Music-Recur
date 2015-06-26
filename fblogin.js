@@ -48,6 +48,7 @@ function testAPI(){
     });
     var scope = angular.element($("#app")).scope();
     scope.$apply(function(){
+        scope.logged = true;
         scope.myname = response.name;
         scope.myid = response.id;
     });

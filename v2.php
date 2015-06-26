@@ -145,6 +145,25 @@
 			.upload:hover{
 				color : lightblue;
 			}
+			#player{
+				position : fixed; 
+				width : 100%; 
+				left : 0%; 
+				bottom : 0%; 
+				background : black;
+				display : none;
+			}
+			#play_data{
+				color : white;
+				font-family : courier; 
+				font-size : 25px; 
+				font-weight : 800; 
+				text-align : center;
+			}
+			#song{
+				height : 28px;
+				width : 100%;
+			}
 		</style>
 	</head>
 	<body style = 'overflow-x : hidden'>
@@ -171,11 +190,11 @@
 			
 			</div>
 		</div>
-		<div id = 'player' style = 'position : absolute; height : 100px; width : 100%; left : 0%; top : 0%; background : rgba(200,200,200, 0.5); display : none'>
-			<div style =' font-family : courier; font-size : 31px; font-weight : 800; text-align : center' id = 'play_data'>sonage name </div>
-			<video id = 'song' song controls = ""  style = 'position : absolute; height : 28px; width : 99%; padding : 10px;'>
+		<div id = 'player'>
+			<div id = 'play_data'>{{ song_name | uppercase }}</div>
+			<audio id = 'song' song controls = "">
 				<source src = "" type = "audio/mp3" id = 'src'>
-			</video>
+			</audio>
 		</div>
 		<div id = 'friendList' ng-show = 'logged'>
 			<div class = 'fhead'>Friends</div>
@@ -259,12 +278,13 @@
     		$scope.flag = 1;
     		$scope.logged = false;
     		$scope.lname = "Mohit Goyal";
+    		$scope.song_name = 'none';
 		 	$scope.play_song = function(){
 		 		console.log($scope.current);
 		 		var b = ($scope.names[$scope.current].name )  + ' - ' + ($scope.names[$scope.current].movie );
 				var a = $scope.names[$scope.current].link;
+				$scope.song_name = b;
                 document.getElementById("player").style.display = 'block';
-                document.getElementById("play_data").innerHTML = b;
 				document.getElementById('src').src = a;
 				document.getElementById('song').load();
 				document.getElementById('song').play();
