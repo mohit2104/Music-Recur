@@ -53,7 +53,7 @@
 			<div id = 'app'>
 				<h1>
 					Music Server
-					<span class = 'control'> 
+					<span class = 'control-container'> 
 					<span class = 'control fa fa-random' ng-click = 'setFlag(3)' ng-class = "{active : checkflag(3)}"></span>
 					<span class = 'control fa fa-repeat' ng-click = 'setFlag(1)' ng-class = "{active : checkflag(1)}"></span>
 					<span class = 'control fa fa-retweet' ng-click = 'setFlag(2)' ng-class = "{active : checkflag(2)}"></span> 

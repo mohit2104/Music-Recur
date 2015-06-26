@@ -43,6 +43,9 @@ a{
 	text-align: right;
 	margin : 0px;
 }
+.control-container{
+	font-size : 20px;
+}
 .control{
 	padding : 5px;
 	font-size : 20px;

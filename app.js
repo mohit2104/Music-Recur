@@ -34,6 +34,7 @@ angular.module('myApp', []).
 		document.getElementById('song').play();
 		$scope.audit($scope.names[$scope.current].oid);
 		$scope.names[$scope.current].count = parseInt($scope.names[$scope.current].count) + 1;
+		$scope.$apply();
         }
 
     $scope.changeCurrent = function(a){
@@ -42,13 +43,13 @@ angular.module('myApp', []).
 	}
 	
 	$scope.changeCurrentProgressive = function(){
-		$scope.current = ( parseInt($scope.current) + 1 ) % parseInt($scope.length);
+		$scope.current = ( parseInt($scope.current) + 1 ) % parseInt($scope.names.length);
 		$scope.play_song();
 	}
 	
 	$scope.suffleChange = function(){
 		while(1){
-			var x = Math.floor((Math.random()*parseInt($scope.length)));
+			var x = Math.floor((Math.random()*parseInt($scope.names.length)));
 			if( x != parseInt($scope.current)){
 				$scope.current = x;
 				break;
