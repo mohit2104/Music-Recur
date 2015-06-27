@@ -3,7 +3,7 @@
 	<head>
 		<meta property="og:title" content="Music Recur" />
 		<meta property="og:url" content="goyal.in/music" />
-		<meta property="og:description" content="An exciting jounrey to let you know about my music, lets me know yours ;)" />
+		<meta property="og:description" content="Woop woop. Make and view your fb friends playlist. Music is fun ;)" />
 		<meta property="og:image" content="http://self-inspiration.com/bundles/selfinspiration/article_pictures/71.jpg" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link rel = 'stylesheet' href = 'style.css'>
@@ -42,7 +42,7 @@
 					Sorry, No friends Found :(
 				</div>
 				<div ng-show = '!logged' class  = 'alert'>
-					Nothing Expolore. :( Let us know about you.
+					Nothing to Expolore. :( Let us know about you.
 					<fb:login-button ng-show = '!logged' scope="email, user_friends" onlogin="checkLoginState();">				
 					</fb:login-button>
 				</div>
