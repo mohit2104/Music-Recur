@@ -46,13 +46,13 @@
 					<fb:login-button ng-show = '!logged' scope="email, user_friends" onlogin="checkLoginState();">				
 					</fb:login-button>
 				</div>
-					<div class="fb-share-button alert" data-href="http://www.goyalm.in/music/v2.php" data-layout="link"></div>
 				<div ng-show = 'friends.length'>
 					<input type = 'text' id = 'friend_search' placeholder = "Search A Friend" ng-model = 'fsearch'>
 					<div class = 'friend' ng-repeat = 'friend in friends | filter : fsearch' ng-click = 'getNewList(friend.id, friend.name)'>
 						{{ friend.name }}
 					</div>
 				</div>
+				<div class="fb-share-button alert" data-href="http://www.goyalm.in/music/v2.php" data-layout="link"></div>
 			</div>
 			<div id = 'player'>
 				<div id = 'play_data'>{{ song_name | uppercase }}</div>
