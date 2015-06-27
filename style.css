@@ -212,3 +212,11 @@ a{
 	background : rgba(0, 50 ,50, 0.4);
 	color : white;
 }
+.fb-share-button{
+	width : 100%;
+	transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+}

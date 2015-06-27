@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta property="og:title" content="Music Recur" />
+		<meta property="og:url" content="goyal.in/music" />
+		<meta property="og:description" content="An exciting jounrey to let you know about my music, lets me know yours ;)" />
+		<meta property="og:image" content="http://self-inspiration.com/bundles/selfinspiration/article_pictures/71.jpg" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link rel = 'stylesheet' href = 'style.css'>
 	</head>
@@ -36,7 +40,7 @@
 				</div> 
 				<div ng-show = '!friends.length' class  = 'alert'>
 					Sorry, No friends Found :(
-					<div class = 'friend' style = 'text-align : center'>Invite</div>
+					<div class="fb-share-button" data-href="http://www.goyalm.in/music" data-layout="link"></div>
 				</div>
 				<div ng-show = 'friends.length'>
 					<input type = 'text' id = 'friend_search' placeholder = "Search A Friend" ng-model = 'fsearch'>
