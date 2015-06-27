@@ -40,7 +40,7 @@
 				</div> 
 				<div ng-show = '!friends.length' class  = 'alert'>
 					Sorry, No friends Found :(
-					<div class="fb-share-button" data-href="http://www.goyalm.in/music" data-layout="link"></div>
+					<div class="fb-share-button" data-href="http://www.goyalm.in/music/v2.php" data-layout="link"></div>
 				</div>
 				<div ng-show = 'friends.length'>
 					<input type = 'text' id = 'friend_search' placeholder = "Search A Friend" ng-model = 'fsearch'>

@@ -21,7 +21,7 @@ angular.module('myApp', []).
 	$scope.length  = 0;
 	$scope.current = 0;
 	$scope.flag = 1;
-	$scope.logged = false;
+	$scope.logged = true;
 	$scope.activ = true;
 	$scope.switch = 1;
 	$scope.lname = "Mohit Goyal";
