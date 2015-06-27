@@ -1,0 +1,51 @@
+<div class = 'choose'>
+    <div ng-class = '{act : activ, dact : !activ, decide : true}' ng-click = "setActiv(1)">
+        Upload a new Song
+    </div>
+    <div ng-class = '{act : !activ, dact : activ, decide : true}' ng-click = "setActiv(2); getAll()">
+        Choose From Server
+    </div>
+</div>
+<div class = 'frm' ng-show = 'activ'>
+    <form id = 'upf' action="" method="post" enctype="multipart/form-data">
+    	<div class = 'inp'>
+            <div class = 'file_up up_inp' id = 'selectSong'>Select Song</div>
+        	<input class = 'up_inp' id = 'file' type="file" name="file" id="fileToUpload"  style = 'opacity : 0; position : absolute; left : 0px; top : 0px' onchange = 'up_change()'\>
+        </div>
+        <div class = 'inp'>
+            <input class = 'up_inp' type='text' name = 'name' placeholder = 'Song Name'/>
+        </div>
+        <div class = 'inp'>
+            <input class = 'up_inp' type='text' name = 'movie' placeholder = 'Movie Name'/>
+        </div>
+        <div class = 'inp'>
+            <input class = 'up_inp' type='text' name = 'artist' placeholder = 'Artists Name'/>
+        </div>
+        <div class  = 'inp'>
+            <input class = 'up_inp sub' type="button" value="Upload Song" name="submit" ng-click = 'upsong()'/>
+        </div>
+    </form>
+</div>
+<div ng-show = '!activ'>
+    <p>
+        <input id = 'input' style = 'width : 80%' type = 'text' ng-model = 'test' placeholder = 'Search Song, Album, Artist Name' />
+    </p>
+    <div ng-repeat = " x in total | filter : test ">
+        <div class = 'each' style = 'width : 80%; left : 10%'>
+            <div class = 'describe'>
+                {{ (x.name | uppercase) + ' - ' + (x.movie | uppercase)  }} 
+            </div>
+        <div class = 'download' >
+                <div  ng-click = "addToList(x.id)">
+                    Add <i class = 'fa fa-plus-square'></i>
+                </div>
+        </div>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+
+
+

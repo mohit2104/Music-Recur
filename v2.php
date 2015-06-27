@@ -13,10 +13,10 @@
 					{{ lname }} <i class = 'fa fa-user'></i>
 				</div>
 				<div style = 'float : left'>
-					<a href = 'upload.php' class = 'upload' style = 'float : left' ng-show = 'logged'>
+					<div class = 'upload' style = 'float : left' ng-show = 'logged' ng-click = 'setSwitch(2)'>
 						Upload <i class  ='fa fa-upload'></i>
-					</a>
-					<div class = 'upload' style = 'float : left' ng-click = "getNewList('0', 'Default')">
+					</div>
+					<div class = 'upload' style = 'float : left' ng-click = "getNewList('0', 'Default'); setSwitch(1)">
 						Home <i class  ='fa fa-home'></i>
 					</div>
 					<div class = 'upload' style = 'float : left' ng-show = 'logged'>
@@ -51,38 +51,26 @@
 					<source src = "" type = "audio/mp3" id = 'src'>
 				</audio>
 			</div>
-			<div id = 'app'>
-				<h1>
-					Music Server
-					<span class = 'control-container'> 
-					<span class = 'control fa fa-random' ng-click = 'setFlag(3)' ng-class = "{active : checkflag(3)}"></span>
-					<span class = 'control fa fa-repeat' ng-click = 'setFlag(1)' ng-class = "{active : checkflag(1)}"></span>
-					<span class = 'control fa fa-retweet' ng-click = 'setFlag(2)' ng-class = "{active : checkflag(2)}"></span> 
-					</span>
-				</h1>
-				<p>
-					<input id = 'input' type = 'text' ng-model = 'test' placeholder = 'Enter Song Name' />
-				</p>
-				<h3 ng-show = '!names.length' class = 'alert'>Playlist Is Empty</h3>
-			  	<div ng-repeat = " x in names | filter : test " ng-show = 'names.length'>
-			   		<div class = 'each'>
-			   			<div class = 'describe'>
-			   				{{ (x.name | uppercase) + ' - ' + (x.movie | uppercase)  }} 
-			   			</div>
-						<div class = 'download' >
-							<span class  = 'count'>{{   x.count  }}</span>
-			   				<button  ng-click = "changeCurrent(x.id)">
-			   					Play
-			   				</button>
-						</div>
-			   			<br>
-			  		</div>
+			<selector id = 'app' ng-show = 'switch == 1'>
+			</selector>
+			<upload id = 'upl' ng-show = 'switch == 2'>
+			</upload>
+			<div id = 'load' ng-show = 'load'>
+				<div class = 'loadi'>
+					<i class ='fa fa-refresh fa-spin'></i>
 				</div>
 			</div>
-			<div id = 'load' ng-show = 'load'>
-			<div class = 'loadi'>
-				<i class ='fa fa-refresh fa-spin'></i>
+			<div id = 'ok' style = 'display : none'>
+				<div class = 'loadi'>
+					<i class ='fa fa-check' style = 'color : green'></i><br>
+					Operation Successfull
+				</div>
 			</div>
+			<div id = 'bad' style = 'display : none'>
+				<div class = 'loadi'>
+					<i class ='fa fa-close' style = 'color : red'></i><br>
+					Operation Failed
+				</div>
 			</div>
 		</div>
 		<script src= "angular.js"></script>

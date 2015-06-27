@@ -16,6 +16,15 @@ a{
 	text-align : center;
 	font-family: courier;
 }
+#upl{
+	position : absolute;
+	top : 10%;
+	left : 20%;
+	width : 80%;
+	height : 90%;
+	text-align : center;
+	font-family: courier;
+}
 #input{
 	font-size : 25px;
 	padding : 4px;
@@ -126,7 +135,7 @@ a{
 	cursor : pointer;
 	text-decoration: none;
 }
-#load{
+#load, #ok, #bad{
 	position : absolute;
 	width : 100%;
 	height : 100%;
@@ -165,4 +174,41 @@ a{
 #song{
 	height : 28px;
 	width : 100%;
+}
+.decide{
+    float : left;
+    width : 40%;
+    margin : 4%;
+    font-family : courier;
+    padding : 5px;
+    color : white;
+    font-size : 30px;
+}
+.act{
+    background : rgba(0, 255, 0, 0.4);
+}
+.dact{
+    background : rgba(255, 0, 0, 0.4);
+}
+#selectSong{
+	background : rgba(0, 0, 255, 0.2);
+	color : white;
+}
+
+.frm{
+	position: absolute;
+	left : 20%;
+	top : 25%;
+}
+.inp{
+	margin : 10px;
+}
+.up_inp{
+	width : 500px;
+	font-size: 25px;
+	padding : 10px;
+}
+.sub{
+	background : rgba(0, 50 ,50, 0.4);
+	color : white;
 }

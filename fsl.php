@@ -1,6 +1,10 @@
 <?php
 	include('../config.php');
-	$query = "select * from data where user_id = '".$_GET['userId']."' limit 10;";
+	$query = '';
+	if($_GET['userId'] > 0)
+		$query = "select * from data where user_id = '".$_GET['userId']."' limit 20;";
+	else
+		$query = "select * from data limit 50;";
 	$result = mysql_query($query);
 	echo  "["; 
 	$id = 0;
