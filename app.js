@@ -26,6 +26,11 @@ angular.module('myApp', []).
 	$scope.switch = 1;
 	$scope.lname = "Mohit Goyal";
 	$scope.song_name = 'none';
+	$scope.play_repeat = function(){
+		document.getElementById('song').play();
+		//todo verify
+		$scope.audit($scope.names[$scope.current].oid);
+	}
  	$scope.play_song = function(){
  		console.log($scope.current);
  		var b = ($scope.names[$scope.current].name )  + ' - ' + ($scope.names[$scope.current].movie );
@@ -64,7 +69,7 @@ angular.module('myApp', []).
 	}
 	$scope.changeSong = function(){
 		if($scope.flag == 1){
-			$scope.play_song();
+			$scope.play_repeat();
 		}
 		else if($scope.flag == 2){
 			$scope.changeCurrentProgressive();
