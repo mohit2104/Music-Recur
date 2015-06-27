@@ -17,13 +17,13 @@
         return;
     } 
 
-    $filename = $_FILES["file"]["name"];
+    $filename = "songs/" . $_FILES["file"]["name"];
 
-    if (file_exists("songs/" . $filename)) {
+    if (file_exists($filename)) {
         echo "failed";
     } else {
         move_uploaded_file($_FILES["file"]["tmp_name"], "songs/" . $filename);
-        $query = "insert into data values ('', '".$_SESSION['id']."', '".$_POST['name']."', '".$_POST['movie']."', '".$_POST['artist']."', '".$target_file."', '0')";
+        $query = "insert into data values ('', '".$_SESSION['id']."', '".$_POST['name']."', '".$_POST['movie']."', '".$_POST['artist']."', '".$filename."', '0')";
         mysql_query( $query );
         echo "success";
     }
