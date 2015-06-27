@@ -31,17 +31,22 @@
 					</div>
 				</div>
 			</div>
-			<div id = 'friendList' ng-show = 'logged'>
+			<div id = 'friendList'>
 				<div class = 'fhead'>
 					Friends
 				</div>
 				<div class = 'friend' ng-click = "getNewList(myid, myname)" ng-show = "logged">
 					Me
 				</div> 
-				<div ng-show = '!friends.length' class  = 'alert'>
+				<div ng-show = '!friends.length && logged' class  = 'alert'>
 					Sorry, No friends Found :(
-					<div class="fb-share-button" data-href="http://www.goyalm.in/music/v2.php" data-layout="link"></div>
 				</div>
+				<div ng-show = '!logged' class  = 'alert'>
+					Nothing Expolore. :( Let us know about you.
+					<fb:login-button ng-show = '!logged' scope="email, user_friends" onlogin="checkLoginState();">				
+					</fb:login-button>
+				</div>
+					<div class="fb-share-button alert" data-href="http://www.goyalm.in/music/v2.php" data-layout="link"></div>
 				<div ng-show = 'friends.length'>
 					<input type = 'text' id = 'friend_search' placeholder = "Search A Friend" ng-model = 'fsearch'>
 					<div class = 'friend' ng-repeat = 'friend in friends | filter : fsearch' ng-click = 'getNewList(friend.id, friend.name)'>
