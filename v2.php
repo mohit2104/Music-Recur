@@ -11,29 +11,27 @@
 	<body style = 'overflow-x : hidden'>
 		<div ng-app = 'myApp' ng-controller = 'namesCtrl'>
 			<div id = 'nav'>
+				<div class = 'upload' style = 'float : left' ng-show = 'logged' ng-click = 'setSwitch(2)'>
+					Upload <i class  ='fa fa-upload'></i>
+				</div>
+				<div class = 'upload' style = 'float : left' ng-click = "getNewList('0', 'Default'); setSwitch(1)">
+					Home <i class  ='fa fa-home'></i>
+				</div>
+				<div class = 'upload' style = 'float : left' ng-show = 'logged'>
+					Edit <i class  ='fa fa-edit'></i>
+				</div>
+				<div class = 'upload' style = 'float : left'>
+					<div style = 'background : white'><input id = 'ssearch' type = 'text' style = 'border : 0px; font-size : 20px; width : 600px; padding : 1px' placeholder = 'Search By Song Name'/><i class  ='fa fa-search' style = 'color : black'></i></div>
+				</div>
 				<fb:login-button ng-show = '!logged' scope="email, user_friends" onlogin="checkLoginState();" style = 'float : right; margin : 15px'>				
 				</fb:login-button>
-				<div class = 'upload' style = 'float : right;'>
+				<div class = 'upload' style = 'float : right'>
 					{{ lname }} <i class = 'fa fa-user'></i>
-				</div>
-				<div style = 'float : left'>
-					<div class = 'upload' style = 'float : left' ng-show = 'logged' ng-click = 'setSwitch(2)'>
-						Upload <i class  ='fa fa-upload'></i>
-					</div>
-					<div class = 'upload' style = 'float : left' ng-click = "getNewList('0', 'Default'); setSwitch(1)">
-						Home <i class  ='fa fa-home'></i>
-					</div>
-					<div class = 'upload' style = 'float : left' ng-show = 'logged'>
-						Edit <i class  ='fa fa-edit'></i>
-					</div>
-					<div class = 'upload' style = 'float : left'>
-						<div style = 'background : white'><input type = 'text' style = 'border : 0px; font-size : 20px; width : 600px; padding : 1px' placeholder = 'Search By Song Name'/><i class  ='fa fa-search' style = 'color : black'></i></div>
-					</div>
 				</div>
 			</div>
 			<div id = 'friendList'>
 				<div class = 'fhead'>
-					Friends
+					Friends PlayList
 				</div>
 				<div class = 'friend' ng-click = "getNewList(myid, myname)" ng-show = "logged">
 					Me
@@ -88,6 +86,18 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script src = '../analytics.js'></script>
 		<div id="status"></div>
+		<script>
+			$(document).ready(function(){
+				var x = parseInt(window.innerWidth);
+				console.log(x);
+				document.getElementById("ssearch").style.width = x/2 + "px";
+				var y = parseInt(window.getComputedStyle(document.getElementById("nav")).height);
+				document.getElementById("friendList").style.top = (y + 20) + 'px';
+				document.getElementById("app").style.top = (y + 20) + 'px';
+				document.getElementById("upl").style.top = (y + 20) + 'px';
+			});
+
+		</script>
 		</body>
 </html>
 	

@@ -12,7 +12,8 @@ a{
 #app{
 	position : absolute;
 	top : 10%;
-	width : 100%;
+	left : 20%;
+	width : 80%;
 	text-align : center;
 	font-family: courier;
 }
@@ -79,7 +80,7 @@ a{
 #friendList{
 	position: absolute;
 	left : 5px;
-	top : 10%;
+	top : 70px;
 	background : rgba(230, 230, 230, 0.4);
 	width : 20%;
 	z-index: 8;
@@ -87,22 +88,23 @@ a{
 }
 .friend{
 	position : relative;
-	font-size : 24px;
+	font-size : 20px;
 	margin : 10px;
 	padding : 10px;
 	background : rgba(0, 0, 0, 0.1);
 	font-family: cursive;
 	font-weight: 400;
 	color : rgba(50, 100, 200, 0.7);
-	text-align: center
+	text-align: center;
+	pointer : cursor;
 }
 #nav{
 	position : absolute; 
 	left : 0%;
 	top : 0%;
 	width : 100%;
-	height: 50px;
-	background : black;
+	min-height: 50px;
+	background : rgba(0, 0, 0, 0.9);
 	border-radius: 0px;
 	margin : 0px;
 }
@@ -110,13 +112,13 @@ a{
 	position : relative;
 	left : 0%;
 	width : 90%;
-	font-size: 20px;
+	font-size: 17px;
 	margin : 10px;
 }
 .fhead{
 	background : black;
 	color : rgba(200, 150, 50, 1);
-	font-size : 25px;
+	font-size : 20px;
 	padding : 5px;
 	font-family : arial;
 	font-weight : 400;
@@ -131,7 +133,9 @@ a{
 .upload{
 	margin : 15px;
 	color : white;
-	font-size : 20px;
+	font-size : 14px;
+	font-weight: 600;
+	font-family: '"Whitney SSm A", "Whitney SSm B",verdana,"Lucida Grande", sans-serif'; 
 	cursor : pointer;
 	text-decoration: none;
 }
