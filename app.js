@@ -200,9 +200,8 @@ angular.module('myApp', []).
         xhr.addEventListener("error", $scope.uploadFailed, false);
         xhr.addEventListener("abort", $scope.uploadCanceled, false);
     */
-     //   xhr.open('POST', 'https://musicrecur.s3.amazonaws.com/', true); 
-     //   xhr.send(fd);
-     $scope.upsongdb();
+        xhr.open('POST', 'https://musicrecur.s3.amazonaws.com/', true); 
+        xhr.send(fd);
 	}
 
 	function uploadProgress(evt) {

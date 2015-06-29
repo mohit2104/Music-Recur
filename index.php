@@ -87,7 +87,7 @@
 			<p>
 				<input id = 'input' type = 'text' ng-model = 'test' placeholder = 'Enter Song Name' />
 			</p>
-		  	<div ng-repeat = " x in names | filter : test  ">
+		  	<div ng-repeat = " x in names | filter : test | orderBy : '-count' ">
 		   		<div class = 'each'>
 		   			<div class = 'describe'>
 		   				{{ (x.name | uppercase) + ' - ' + (x.movie | uppercase)  }} 
