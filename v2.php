@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta property="og:title" content="Music Recur" />
 		<meta property="og:url" content="goyal.in/music" />
 		<meta property="og:description" content="Woop woop. Make and view your fb friends playlist. Music is fun ;)" />
 		<meta property="og:image" content="http://self-inspiration.com/bundles/selfinspiration/article_pictures/71.jpg" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link rel = 'stylesheet' href = 'style.css'>
+		<title>Music Recur</title>
 	</head>
 	<body style = 'overflow-x : hidden'>
 		<div ng-app = 'myApp' ng-controller = 'namesCtrl'>
@@ -64,7 +66,8 @@
 			</upload>
 			<div id = 'load' ng-show = 'load'>
 				<div class = 'loadi'>
-					<i class ='fa fa-refresh fa-spin'></i>
+					<i class ='fa fa-refresh fa-spin'></i><br>
+					<div style = 'font-size : 25px' id = 'info'></div>
 				</div>
 			</div>
 			<div id = 'ok' style = 'display : none'>

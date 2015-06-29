@@ -168,28 +168,78 @@ angular.module('myApp', []).
 
 	$scope.upsong = function(){
 		$scope.load = true;
+		document.getElementById("info").innerHTML = "Creating a 10 minute session for uploading";
         console.log("Uploading a song");
-        var fd = new FormData(document.getElementById("upf"));
         $.ajax({
-          url: "up2.php",
-          type: "POST",
-          data: fd,
-          enctype: 'multipart/form-data',
-          processData: false,
-          contentType: false
-		}).done(function( response ){
+			url : "signature.php",
+			method : "GET",
+			data : { }
+		}).done(function(response){
+			console.log(response);
+			var z = JSON.parse(response);
+			$scope.uploadFile(z.pl, z.sig);
+		});
+	}
+    
+	$scope.key = '';	
+    $scope.uploadFile = function(pl, sig) {
+        var file = document.getElementById('file').files[0];
+        var fd = new FormData();
+        $scope.key = "songs/" + (new Date).getTime() + '-' + file.name;
+        fd.append('key', $scope.key);
+        fd.append('AWSAccessKeyId', 'AKIAI6GQEQXABZQAV7DA');
+        fd.append('acl', 'public-read');
+        fd.append('success_action_redirect', "http://www.goyalm.in/music/v2.php")
+        fd.append('policy', pl);
+        fd.append('signature', sig);
+        fd.append('Content-Type', 'audio/mp3');
+        fd.append('file', file);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+    /*  xhr.addEventListener("load", $scope.uploadComplete, false);
+        xhr.addEventListener("error", $scope.uploadFailed, false);
+        xhr.addEventListener("abort", $scope.uploadCanceled, false);
+    */
+     //   xhr.open('POST', 'https://musicrecur.s3.amazonaws.com/', true); 
+     //   xhr.send(fd);
+     $scope.upsongdb();
+	}
+
+	function uploadProgress(evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+          console.log(percentComplete);
+          document.getElementById("info").innerHTML = percentComplete + " % uploaded";
+          if(percentComplete > 99)
+          	$scope.upsongdb();
+        }
+    }
+
+	$scope.upsongdb = function(){
+		document.getElementById("info").innerHTML = "linking your account with the song.";
+        console.log("Uploading to db");
+        var nm = document.getElementById('nm').value;
+        var mv = document.getElementById('mv').value;
+        var at = document.getElementById('at').value;
+        var loc = "https://s3-us-west-1.amazonaws.com/musicrecur/" + $scope.key;
+        $.ajax({
+			url : "up2.php",
+			method : "POST",
+			data : { 'name' : nm, 'movie' : mv, 'artist' : at, 'loc' : loc }
+		}).done(function(response){
 			response = response.trim();
 			$scope.load = false;
 			$scope.$apply();
 			console.log("This is response : " + response + ".");
 			if(response == 'success'){
+				document.getElementById("info").innerHTML = '';
 				ok_case_show();
 			}
 			else{
 				bad_case_show();
 			}
-        });
-    }
+		});
+	}
 
 	$scope.getNewList(0, "Mohit Goyal");
 }).directive('upload', function(){

@@ -1,0 +1,70 @@
+<html> 
+  <head>
+    <title>S3 POST Form</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script>
+      function uploadFile() {
+        var file = document.getElementById('file').files[0];
+        var fd = new FormData();
+        var key = "songs/" + (new Date).getTime() + '-' + file.name;
+
+        fd.append('key', key);
+        fd.append('AWSAccessKeyId', 'AKIAI6GQEQXABZQAV7DA');
+        fd.append('acl', 'public-read');
+        fd.append('success_action_redirect', "http://www.goyalm.in/music/v2.php")
+        fd.append('policy', "eyJleHBpcmF0aW9uIjogIjIwMTYtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsgCiAgICB7ImJ1Y2tldCI6ICJtdXNpY3JlY3VyIn0sIAogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgInNvbmdzLyJdLAogICAgeyJhY2wiOiAicHVibGljLXJlYWQifSwKICAgIHsic3VjY2Vzc19hY3Rpb25fcmVkaXJlY3QiOiAiaHR0cDovL3d3dy5nb3lhbG0uaW4vbXVzaWMvdjIucGhwIn0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRDb250ZW50LVR5cGUiLCAiYXVkaW8vbXAzIl0sCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgMTAwMDAwMDBdCiAgXQp9Cgo=");
+        fd.append('signature',"atnCJeA3iNhfeYxj21CtnrF5/N8=");
+        fd.append('Content-Type', 'audio/mp3');
+        fd.append('file', file);
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.addEventListener("error", uploadFailed, false);
+        xhr.addEventListener("abort", uploadCanceled, false);
+
+        xhr.open('POST', 'https://musicrecur.s3.amazonaws.com/', true); 
+        xhr.send(fd);
+      }
+
+      function uploadProgress(evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+          document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+        }
+        else {
+          document.getElementById('progressNumber').innerHTML = 'unable to compute';
+        }
+      }
+
+      function uploadComplete(evt) {
+        /* This event is raised when the server send back a response */
+        alert("Done - " + evt.target.responseText );
+      }
+
+      function uploadFailed(evt) {
+        alert("There was an error attempting to upload the file." + evt);
+      }
+
+      function uploadCanceled(evt) {
+        alert("The upload has been canceled by the user or the browser dropped the connection.");
+      }
+    </script>
+  </head>
+  <body>
+    <form id="form1" enctype="multipart/form-data" method="post">
+      <div class="row">
+        <label for="file">Select a File to Upload</label><br />
+        <input type="file" name="file" id="file" onchange="fileSelected()"/>
+      </div>
+    </form>
+    <div id="fileName"></div>
+    <div id="fileSize"></div>
+    <div id="fileType"></div>
+    <div class="row">
+      <input type="button" onclick="uploadFile()" value="Upload" />
+    </div>
+    <div id="progressNumber"></div>
+  </body>
+</html>
