@@ -16,6 +16,7 @@ angular.module('myApp', []).
 	$scope.total = [];
 	$scope.myid = 0;
 	$scope.myname = 0;
+	$scope.uploading = false;
 	$scope.load = false;
 //	$scope.friends = [{"name" : "mohit", "id" : 0}, {"name" : "goyal", "id" : 1}];
 	$scope.length  = 0;
@@ -142,7 +143,9 @@ angular.module('myApp', []).
 		});				
 	}
 	$scope.addToList = function(a){
-		$scope.load = true;
+		$scope.uploading = true;
+		$scope.uploading_message = "uploading info to server";
+		$scope.$apply();
 		console.log("uploading");
 		var x = $scope.total[a].name;
 		var y = $scope.total[a].artist;
@@ -154,7 +157,7 @@ angular.module('myApp', []).
 			data : { name : x, artist : y, movie : z, path : za }
 		}).done(function(response){
 			response = response.trim();
-			$scope.load = false;
+			$scope.uploading = false;
 			$scope.$apply();
 			console.log("This is response : " + response + ".");
 			if(response == 'success'){
@@ -167,8 +170,8 @@ angular.module('myApp', []).
 	}
 
 	$scope.upsong = function(){
-		$scope.load = true;
-		document.getElementById("info").innerHTML = "Creating a 10 minute session for uploading";
+		$scope.uploading = true;
+		$scope.uploading_message = "Creating a 10 minute session for uploading";
         console.log("Uploading a song");
         $.ajax({
 			url : "signature.php",
@@ -208,14 +211,16 @@ angular.module('myApp', []).
         if (evt.lengthComputable) {
           var percentComplete = Math.round(evt.loaded * 100 / evt.total);
           console.log(percentComplete);
-          document.getElementById("info").innerHTML = percentComplete + " % uploaded";
+          $scope.uploading_message = percentComplete + " % uploaded";
+          $scope.$apply();
           if(percentComplete > 99)
           	$scope.upsongdb();
         }
     }
 
 	$scope.upsongdb = function(){
-		document.getElementById("info").innerHTML = "linking your account with the song.";
+		$scope.uploading_message = "linking your account with the song.";
+		$scope.$apply();
         console.log("Uploading to db");
         var nm = document.getElementById('nm').value;
         var mv = document.getElementById('mv').value;
@@ -227,11 +232,11 @@ angular.module('myApp', []).
 			data : { 'name' : nm, 'movie' : mv, 'artist' : at, 'loc' : loc }
 		}).done(function(response){
 			response = response.trim();
-			$scope.load = false;
+			$scope.uploading = false;
 			$scope.$apply();
 			console.log("This is response : " + response + ".");
 			if(response == 'success'){
-				document.getElementById("info").innerHTML = '';
+				$uploading_message = '';
 				ok_case_show();
 			}
 			else{
