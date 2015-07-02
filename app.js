@@ -205,6 +205,11 @@ angular.module('myApp', []).
     */
         xhr.open('POST', 'https://musicrecur.s3.amazonaws.com/', true); 
         xhr.send(fd);
+        xhr.onreadystatechange = function(){
+        	if( xhr.readyState == 4 ){
+        		$scope.upsongdb();
+        	}
+        }
 	}
 
 	function uploadProgress(evt) {
@@ -213,8 +218,6 @@ angular.module('myApp', []).
           console.log(percentComplete);
           $scope.uploading_message = percentComplete + " % uploaded";
           $scope.$apply();
-          if(percentComplete > 99)
-          	$scope.upsongdb();
         }
     }
 
