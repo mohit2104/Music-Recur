@@ -188,7 +188,7 @@ angular.module('myApp', []).
     $scope.uploadFile = function(pl, sig) {
         var file = document.getElementById('file').files[0];
         var fd = new FormData();
-        $scope.key = "songs/" + (new Date).getTime() + '-' + file.name;
+        $scope.key = "songs/" + (new Date).getTime() + ".mp3";
         fd.append('key', $scope.key);
         fd.append('AWSAccessKeyId', 'AKIAI6GQEQXABZQAV7DA');
         fd.append('acl', 'public-read');
