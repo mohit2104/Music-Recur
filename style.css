@@ -242,3 +242,9 @@ a{
 	font-size : 17px;
 	color : rgba(255,255,255, 0.9);
 }
+.progressBar{
+	position : relative;
+	top : 45%;
+	width : 90%;
+	background : white;
+}

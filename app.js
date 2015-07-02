@@ -17,6 +17,8 @@ angular.module('myApp', []).
 	$scope.myid = 0;
 	$scope.myname = 0;
 	$scope.uploading = false;
+	$scope.progressBar = false;
+	$scope.progress = 0;
 	$scope.load = false;
 //	$scope.friends = [{"name" : "mohit", "id" : 0}, {"name" : "goyal", "id" : 1}];
 	$scope.length  = 0;
@@ -205,9 +207,11 @@ angular.module('myApp', []).
     */
         xhr.open('POST', 'https://musicrecur.s3.amazonaws.com/', true); 
         xhr.send(fd);
+        $scope.progressBar = true;
         xhr.onreadystatechange = function(){
         	if( xhr.readyState == 4 ){
         		$scope.upsongdb();
+        		$scope.progressBar = false;
         	}
         }
 	}
@@ -216,6 +220,7 @@ angular.module('myApp', []).
         if (evt.lengthComputable) {
           var percentComplete = Math.round(evt.loaded * 100 / evt.total);
           console.log(percentComplete);
+          $scope.progress = percentComplete;
           $scope.uploading_message = percentComplete + " % uploaded";
           $scope.$apply();
         }

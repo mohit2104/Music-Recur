@@ -46,6 +46,7 @@
 </div>
 <div id = 'upload_status'ng-show = 'uploading'>
     <div id = 'upload_status_message' ng-bind = 'uploading_message'></div>
+    <progress value = '{{ progress }}' max = '100' ng-show = 'progressBar' class = 'progressBar'></progress>
 </div>
 
 
