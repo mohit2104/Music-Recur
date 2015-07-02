@@ -35,7 +35,7 @@
 				<div class = 'fhead'>
 					Friends PlayList
 				</div>
-				<div class = 'friend' ng-click = "getNewList(myid, myname)" ng-show = "logged">
+				<div class = 'friend' ng-click = "getNewList(myid, myname); setSwitch(1)" ng-show = "logged">
 					Me
 				</div> 
 				<div ng-show = '!friends.length && logged' class  = 'alert'>
@@ -48,7 +48,7 @@
 				</div>
 				<div ng-show = 'friends.length'>
 					<input type = 'text' id = 'friend_search' placeholder = "Search A Friend" ng-model = 'fsearch'>
-					<div class = 'friend' ng-repeat = 'friend in friends | filter : fsearch' ng-click = 'getNewList(friend.id, friend.name)'>
+					<div class = 'friend' ng-repeat = 'friend in friends | filter : fsearch' ng-click = 'getNewList(friend.id, friend.name); setSwitch(1)'>
 						{{ friend.name }}
 					</div>
 				</div>
