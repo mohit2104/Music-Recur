@@ -64,6 +64,8 @@
 			</selector>
 			<upload id = 'upl' ng-show = 'switch == 2'>
 			</upload>
+			<analyzer id ='analyzer' ng-show = 'analyzerMode'>
+			</analyzer>
 			<div id = 'load' ng-show = 'load'>
 				<div class = 'loadi'>
 					<i class ='fa fa-refresh fa-spin'></i><br>

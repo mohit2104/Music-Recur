@@ -10,7 +10,8 @@ angular.module('myApp', []).
 					
 				}
 			}
-	}).controller('namesCtrl', function($scope) {
+	}).controller('namesCtrl', function($scope, $window){
+
 	$scope.names = [];
 	$scope.friends = [];
 	$scope.total = [];
@@ -20,7 +21,6 @@ angular.module('myApp', []).
 	$scope.progressBar = false;
 	$scope.progress = 0;
 	$scope.load = false;
-//	$scope.friends = [{"name" : "mohit", "id" : 0}, {"name" : "goyal", "id" : 1}];
 	$scope.length  = 0;
 	$scope.current = 0;
 	$scope.flag = 1;
@@ -29,6 +29,51 @@ angular.module('myApp', []).
 	$scope.switch = 1;
 	$scope.lname = "Mohit Goyal";
 	$scope.song_name = 'none';
+	$scope.play = false;
+	$scope.analyzerMode = true;
+	$scope.time = '0:0';
+	$scope.track = 0;
+
+	$window.addEventListener('keydown', function(e) {
+	    if (e.keyCode == 32){
+	    	if($scope.play == true){ 
+	        	try{
+		        	$window.audio.pause();
+		        	$scope.play = false;
+		        }
+		        catch(err){
+		        	console.log(err + " : event listener keydown pause");
+		        }
+	        }
+	      	else{
+	      		try{
+		        	$window.audio.play();
+		        	$scope.play = true;
+		        }
+		        catch(err){
+		        	console.log(err + " : event listener keydown play");
+		        }
+	      	}
+	    }
+	}, false);
+
+	$window.audio.addEventListener('timeupdate', function(e){
+    	var currTime = audio.currentTime;
+    	var prev = $scope.time;
+    	$scope.time = parseInt(currTime / 60) + ':' + parseInt(currTime % 60);
+    	if(prev != $scope.time)
+    		$scope.track = $scope.track + 1;
+    	if($scope.track >= 3){
+    		$scope.analyzerMode = true;
+    	}
+    	$scope.$apply();
+  	}, false);
+
+	$window.addEventListener('mousemove', function(e){
+		$scope.track = 0;
+		$scope.analyzerMode = false;
+		$scope.$apply();
+	});
 	$scope.play_repeat = function(){
 		document.getElementById('song').play();
 		//todo verify
@@ -264,7 +309,18 @@ angular.module('myApp', []).
 		restrict :'E',
 		templateUrl : "selector.html"
 	}
+}).directive('analyzer', function(){
+	return {
+		restrict :'E',
+		templateUrl : "analyzer.html"
+	}
 });
+
+window.audio = document.getElementById("song");
+window.audio.crossOrigin = "https://s3-us-west-1.amazonaws.com";
+var currenTimeNode = document.querySelector('#current-time');
+
+
 
 function up_change(){
 	var value = document.getElementById("file").value.split(/[\/\\]/).pop();
@@ -296,5 +352,65 @@ function bad_case_hide(){
 function followup(a){
 	document.getElementById(a).style.display = 'none';
 }
+
+// draw canvas by analyzing the beats  
+
+var context = new AudioContext();
+var analyser = context.createAnalyser();
+  
+function rafCallback(time) {
+    window.requestAnimationFrame(rafCallback);
+    try{
+	    var canvas = document.getElementById('fft');
+		var ctx = canvas.getContext('2d');
+	    var freqByteData = new Uint8Array(analyser.frequencyBinCount);
+	    analyser.getByteFrequencyData(freqByteData); 
+	    var CANVAS_WIDTH = parseInt(window.innerWidth);
+	    var CANVAS_HEIGHT = parseInt(window.innerHeight);
+	    canvas.height = CANVAS_HEIGHT;
+	    canvas.width = CANVAS_WIDTH;
+	    var SPACER_WIDTH = 25;
+	    var BAR_WIDTH = 15;
+	    var OFFSET = 100;
+	    var CUTOFF = 23;
+	    var numBars = Math.round(CANVAS_WIDTH / SPACER_WIDTH);
+	    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+	    var min = 9999;
+	    ctx.fillStyle = 'rgba(100, 50, 100, 0.9)';
+	    for (var i = 0; i < numBars; ++i) {
+	        if( min > freqByteData[  i + numBars] * 3)
+	          	min = freqByteData[  i + numBars] * 3;
+	    }
+	  	ctx.beginPath();
+	  	ctx.lineWidth = 1;
+	  	ctx.strokeStyle = "rgb(255, 0, 0)";
+	  	for (var i = 0; i < numBars; ++i) {
+	    	var magnitude = freqByteData[ i + numBars] * 3 - min + 2;
+	    	var yc = CANVAS_HEIGHT - (freqByteData[  i + numBars] * 3 + freqByteData[  i + 2 + numBars] * 3) / 2 + min - 2;
+	      	var xc = ( i + 1) / 2 * SPACER_WIDTH;
+	      	if(i > 0)
+	;//      		ctx.quadraticCurveTo(i * SPACER_WIDTH, CANVAS_HEIGHT - magnitude, xc, yc);
+	    	else
+	 ;//     		ctx.moveTo(i * SPACER_WIDTH, CANVAS_HEIGHT - magnitude);
+	        ctx.stroke();
+	        ctx.fillRect(i * SPACER_WIDTH, CANVAS_HEIGHT, BAR_WIDTH, -magnitude);
+	  	}
+	  	ctx.closePath();
+	}
+	catch(err){
+		console.log(err);
+	}
+
+}
+
+function onLoad(e) {
+    var source = context.createMediaElementSource(audio);
+    source.connect(analyser);
+    analyser.connect(context.destination);
+    rafCallback();
+}
+
+window.addEventListener('load', onLoad, false);
+
 
 
