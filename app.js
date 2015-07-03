@@ -357,9 +357,19 @@ function followup(a){
 
 var context = new AudioContext();
 var analyser = context.createAnalyser();
+
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
   
 function rafCallback(time) {
-    window.requestAnimationFrame(rafCallback);
+    requestAnimFrame(rafCallback);
     try{
 	    var canvas = document.getElementById('fft');
 		var ctx = canvas.getContext('2d');
