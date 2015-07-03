@@ -386,7 +386,7 @@ function rafCallback(time) {
 	    var numBars = Math.round(CANVAS_WIDTH / SPACER_WIDTH);
 	    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	    var min = 9999;
-	    ctx.fillStyle = 'rgba(100, 50, 100, 0.9)';
+	    ctx.fillStyle = 'rgba(100, 50, 100, 0.3)';
 	    for (var i = 0; i < numBars; ++i) {
 	        if( min > freqByteData[  i + numBars] * 3)
 	          	min = freqByteData[  i + numBars] * 3;
@@ -403,7 +403,7 @@ function rafCallback(time) {
 	    	else
 	 ;//     		ctx.moveTo(i * SPACER_WIDTH, CANVAS_HEIGHT - magnitude);
 	        ctx.stroke();
-	        ctx.fillRect(i * SPACER_WIDTH, CANVAS_HEIGHT, BAR_WIDTH, -magnitude);
+	        ctx.fillRect(i * SPACER_WIDTH, 0, BAR_WIDTH, magnitude);
 	  	}
 	  	ctx.closePath();
 	}
