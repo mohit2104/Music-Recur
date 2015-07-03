@@ -17,6 +17,7 @@ a{
 	text-align : center;
 	font-family: courier;
 	overflow : auto;
+	margin-bottom: 200px;
 }
 #upl{
 	position : absolute;
@@ -26,6 +27,7 @@ a{
 	height : 90%;
 	text-align : center;
 	font-family: courier;
+	margin-bottom: 200px;
 }
 #input{
 	font-size : 25px;
@@ -86,6 +88,7 @@ a{
 	width : 20%;
 	z-index: 8;
 	min-height: 90%;
+	margin-bottom: 200px;
 }
 .friend{
 	position : relative;
