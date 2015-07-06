@@ -424,83 +424,50 @@ window.addEventListener('load', onLoad, false);
 
 // voice recognizer
 
-
-/*
-recognizer.onresult = function(event){
-	if(event.result.length > 0){
-		var result = event.results[event.results.length - 1];
-		var rval = result[0].transcript.toLowerCase();
-		console.log(rval);
-		if(rval == "play" || rval == "start" || rval == "begin"){
-			window.audio.play();
-		}
-		else if(rval == 'pause' || rval == 'stop' || rval == 'end'){
-			window.audio.pause();
-		}
-		else if(rval == 'repeat'){
-			scp.$apply(function(){
-				scp.flag = 1;
-			});
-		}
-		else if(rval == 'suffle'){
-			scp.$apply(function(){
-				scp.flag = 3;
-			});
-		}
-		else if(rval == 'linear'){
-			scp.$apply(function(){
-				scp.flag = 2;
-			});
-		}
-	}
+var recognizer;
+if(!webkitSpeechRecognition){
+	document.getElementById("voice").display = "none";
 }
-*/
-var recognizer = new webkitSpeechRecognition();
-recognizer.continuous = true;
-recognizer.interimResults = true;
-recognizer.lang = "en";
-recognizer.onresult = function(event) {
-    if (event.results.length > 0) {
-        var result = event.results[event.results.length-1];
-        if(result.isFinal) {
-	   var scp = angular.element($("#mainc")).scope();
-            var rval = result[0].transcript.toLowerCase().trim();
-	    console.log(rval);
-	    console.log(scp.logged);
-	    if(rval == "play" || rval == "start" || rval == "begin"){
-                        window.audio.play();
-                }
-                else if(rval == 'pause' || rval == 'stop' || rval == 'end'){
-			console.log("stopping");
-                        window.audio.pause();
-                }
+else{
+	recognizer = new webkitSpeechRecognition();
+	recognizer.continuous = true;
+	recognizer.interimResults = true;
+	recognizer.lang = "en";
+	recognizer.onresult = function(event) {
+	    if (event.results.length > 0) {
+	        var result = event.results[event.results.length-1];
+	        if(result.isFinal) {
+		   		var scp = angular.element($("#mainc")).scope();
+	            var rval = result[0].transcript.toLowerCase().trim();
+		    	console.log(rval);
+			    if(rval == "play" || rval == "start" || rval == "begin"){
+		            window.audio.play();
+		        }
+		        else if(rval == 'pause' || rval == 'stop' || rval == 'end'){
+		            window.audio.pause();
+		        }
                 else if(rval == 'repeat'){
-                        scp.$apply(function(){
-                                scp.flag = 1;
-                        });
+                    scp.$apply(function(){
+                        scp.flag = 1;
+                    });
                 }
                 else if(rval == 'shuffle'){
-			console.log("inside");
-                        scp.$apply(function(){
-                                scp.flag = 3;
-                        });
+                    scp.$apply(function(){
+                        scp.flag = 3;
+                    });
                 }
                 else if(rval == 'linear'){
-                        scp.$apply(function(){
-                                scp.flag = 2;
-                        });
+                    scp.$apply(function(){
+                        scp.flag = 2;
+                    });
                 }
-
-        }
-    }  
-};
+		    }
+	    }  
+	};
+}
 
 function startRecord(){
 	recognizer.start();
-}
-
-if(!webkitSpeechRecognition){
-	document.getElementById("voice").display = "none";
 }
 
 
