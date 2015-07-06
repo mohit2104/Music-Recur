@@ -30,6 +30,9 @@
 				<div class = 'upload' style = 'float : right'>
 					{{ lname }} <i class = 'fa fa-user'></i>
 				</div>
+				<div id = 'voice' onclick = 'startRecord()' class = 'upload' style = 'float : right'>
+					<i class = 'fa fa-microphone voicer'></i>
+				</div>
 			</div>
 			<div id = 'friendList'>
 				<div class = 'fhead'>

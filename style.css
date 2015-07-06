@@ -280,3 +280,13 @@ a{
 	height : 100%;
 	z-index : 12;
 }
+.voicer{
+	font-size: 18px;
+	cursor : pointer;
+	border-radius: 43%;
+	padding : 2px;
+}
+.voicer:hover{
+	background : white;
+	color : black;
+}
