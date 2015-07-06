@@ -11,7 +11,7 @@
 		<title>Music Recur</title>
 	</head>
 	<body style = 'overflow-x : hidden'>
-		<div ng-app = 'myApp' ng-controller = 'namesCtrl'>
+		<div id = 'mainc' ng-app = 'myApp' ng-controller = 'namesCtrl'>
 			<div id = 'nav'>
 				<div class = 'upload' style = 'float : left' ng-show = 'logged' ng-click = 'setSwitch(2)'>
 					Upload <i class  ='fa fa-upload'></i>

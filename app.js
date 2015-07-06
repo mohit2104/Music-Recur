@@ -424,11 +424,8 @@ window.addEventListener('load', onLoad, false);
 
 // voice recognizer
 
-var recognizer = new webkitSpeechRecognition();
-recognizer.continuous = true;
-recognizer.interimResults = true;
-recognizer.lang = 'en';
-var scp = angular.element($("#main")).scope();
+
+/*
 recognizer.onresult = function(event){
 	if(event.result.length > 0){
 		var result = event.results[event.results.length - 1];
@@ -457,6 +454,46 @@ recognizer.onresult = function(event){
 		}
 	}
 }
+*/
+var recognizer = new webkitSpeechRecognition();
+recognizer.continuous = true;
+recognizer.interimResults = true;
+recognizer.lang = "en";
+recognizer.onresult = function(event) {
+    if (event.results.length > 0) {
+        var result = event.results[event.results.length-1];
+        if(result.isFinal) {
+	   var scp = angular.element($("#mainc")).scope();
+            var rval = result[0].transcript.toLowerCase().trim();
+	    console.log(rval);
+	    console.log(scp.logged);
+	    if(rval == "play" || rval == "start" || rval == "begin"){
+                        window.audio.play();
+                }
+                else if(rval == 'pause' || rval == 'stop' || rval == 'end'){
+			console.log("stopping");
+                        window.audio.pause();
+                }
+                else if(rval == 'repeat'){
+                        scp.$apply(function(){
+                                scp.flag = 1;
+                        });
+                }
+                else if(rval == 'shuffle'){
+			console.log("inside");
+                        scp.$apply(function(){
+                                scp.flag = 3;
+                        });
+                }
+                else if(rval == 'linear'){
+                        scp.$apply(function(){
+                                scp.flag = 2;
+                        });
+                }
+
+        }
+    }  
+};
 
 function startRecord(){
 	recognizer.start();
