@@ -422,5 +422,54 @@ function onLoad(e) {
 
 window.addEventListener('load', onLoad, false);
 
+// voice recognizer
+
+var recognizer;
+if(!webkitSpeechRecognition){
+	document.getElementById("voice").display = "none";
+}
+else{
+	recognizer = new webkitSpeechRecognition();
+	recognizer.continuous = true;
+	recognizer.interimResults = true;
+	recognizer.lang = "en";
+	recognizer.onresult = function(event) {
+	    if (event.results.length > 0) {
+	        var result = event.results[event.results.length-1];
+	        if(result.isFinal) {
+		   		var scp = angular.element($("#mainc")).scope();
+	            var rval = result[0].transcript.toLowerCase().trim();
+		    	console.log(rval);
+			    if(rval == "play" || rval == "start" || rval == "begin"){
+		            window.audio.play();
+		        }
+		        else if(rval == 'pause' || rval == 'stop' || rval == 'end'){
+		            window.audio.pause();
+		        }
+                else if(rval == 'repeat'){
+                    scp.$apply(function(){
+                        scp.flag = 1;
+                    });
+                }
+                else if(rval == 'shuffle'){
+                    scp.$apply(function(){
+                        scp.flag = 3;
+                    });
+                }
+                else if(rval == 'linear'){
+                    scp.$apply(function(){
+                        scp.flag = 2;
+                    });
+                }
+		    }
+	    }  
+	};
+}
+
+function startRecord(){
+	recognizer.start();
+}
+
+
 
 
